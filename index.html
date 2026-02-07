@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Registration Form</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+  }
+
+  body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #000; /* fallback */
+  background-image: url("tokyo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+  .glass-card {
+    width: 380px;
+    padding: 30px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    color: #fff;
+  }
+
+  /* ---- HEADER (no button look) ---- */
+  .form-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+  }
+
+  label {
+    font-size: 13px;
+    opacity: 0.9;
+  }
+
+  input, select {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: rgba(255,255,255,0.25);
+    color: #fff;
+  }
+
+  input::placeholder {
+    color: rgba(255,255,255,0.7);
+  }
+
+  .form-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .checkbox {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  align-items: start;
+  column-gap: 12px;
+  margin: 18px 0 12px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.checkbox input {
+  margin-top: 3px;
+}
+
+  button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #0a3d62;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #074173;
+  }
+
+  .error {
+    font-size: 11px;
+    color: #ffdddd;
+    margin-bottom: 6px;
+  }
+
+  .footer-text {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 15px;
+    opacity: 0.8;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="glass-card">
+
+  <div class="form-title">Register</div>
+
+  <form id="registrationForm">
+
+    <label>First Name</label>
+    <input type="text" id="firstName" placeholder="Enter first name">
+    <div class="error" id="firstNameError"></div>
+
+    <label>Last Name</label>
+    <input type="text" id="lastName" placeholder="Enter last name">
+    <div class="error" id="lastNameError"></div>
+
+    <label>Email</label>
+    <input type="email" id="email" placeholder="example@email.com">
+    <div class="error" id="emailError"></div>
+
+    <label>Password</label>
+    <input type="password" id="password" placeholder="••••••••">
+    <div class="error" id="passwordError"></div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Gender</label>
+        <select id="gender">
+          <option value="">Select</option>
+          <option>Male</option>
+          <option>Female</option>
+          <option>Other</option>
+        </select>
+        <div class="error" id="genderError"></div>
+      </div>
+
+      <div class="form-group">
+        <label>Birthday</label>
+        <input type="date" id="birthday">
+        <div class="error" id="birthdayError"></div>
+      </div>
+    </div>
+
+    <div class="checkbox">
+  <input type="checkbox" required>
+  <label>I agree to the processing of personal data</label>
+</div>
+
+    <button type="submit">Register</button>
+
+    <div class="footer-text">
+      Already have an account? Login
+    </div>
+
+  </form>
+</div>
+
+<script>
+  document.getElementById("registrationForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let valid = true;
+    const nameRegex = /^[A-Za-z]+$/;
+    const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+
+    document.querySelectorAll(".error").forEach(e => e.textContent = "");
+
+    if (!nameRegex.test(firstName.value)) {
+      firstNameError.textContent = "Letters only";
+      valid = false;
+    }
+
+    if (!nameRegex.test(lastName.value)) {
+      lastNameError.textContent = "Letters only";
+      valid = false;
+    }
+
+    if (!emailRegex.test(email.value)) {
+      emailError.textContent = "Invalid email";
+      valid = false;
+    }
+
+    if (password.value.length < 6) {
+      passwordError.textContent = "Min 6 characters";
+      valid = false;
+    }
+
+    if (!gender.value) {
+      genderError.textContent = "Select gender";
+      valid = false;
+    }
+
+    if (!birthday.value) {
+      birthdayError.textContent = "Select birthday";
+      valid = false;
+    }
+
+    if (valid) {
+      alert("Registration successful!");
+      this.reset();
+    }
+  });
+</script>
+
+</body>
+</html>
