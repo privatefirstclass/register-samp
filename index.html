@@ -123,6 +123,55 @@
     margin-top: 15px;
     opacity: 0.8;
   }
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7); 
+  display: none; 
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 300px;
+  width: 80%;
+}
+
+.popup-content h2 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.popup-content p {
+  margin: 0 0 20px;
+  font-size: 14px;
+}
+
+.popup-content button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #0a3d62;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.popup-content button:hover {
+  background: #074173;
+}
+
 </style>
 </head>
 
@@ -181,6 +230,15 @@
     </div>
 
   </form>
+ 
+<div id="successPopup" class="popup-overlay">
+  <div class="popup-content">
+    <h2>Registration Successful!</h2>
+    <p>Your account has been created.</p>
+    <button id="closePopup">OK</button>
+  </div>
+</div>
+
 </div>
 
 <script>
@@ -224,14 +282,20 @@
     }
 
     if (valid) {
-      alert("Registration successful!");
-      this.reset();
-    }
+  const popup = document.getElementById("successPopup");
+  popup.style.display = "flex";
+  this.reset();
+}
   });
+
+ document.getElementById("closePopup").addEventListener("click", function() {
+  document.getElementById("successPopup").style.display = "none";
+});
 </script>
 
 </body>
 </html>
+
 
 
 
